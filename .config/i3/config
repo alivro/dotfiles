@@ -1,0 +1,429 @@
+# i3 config file (v4)
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+# Set modifier
+set $mod Mod4
+set $alt Mod1
+
+# Font for window titles
+font pango: Noto Sans Regular 10
+
+
+####################
+#    Workspaces    #
+####################
+
+# Define names for workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace
+bindsym $mod+1    workspace  $ws1
+bindsym $mod+2    workspace  $ws2
+bindsym $mod+3    workspace  $ws3
+bindsym $mod+4    workspace  $ws4
+bindsym $mod+5    workspace  $ws5
+bindsym $mod+6    workspace  $ws6
+bindsym $mod+7    workspace  $ws7
+bindsym $mod+8    workspace  $ws8
+bindsym $mod+9    workspace  $ws9
+bindsym $mod+0    workspace  $ws10
+
+# Switch to workspace with numpad keys
+bindcode $mod+87 workspace 1
+bindcode $mod+88 workspace 2
+bindcode $mod+89 workspace 3
+bindcode $mod+83 workspace 4
+bindcode $mod+84 workspace 5
+bindcode $mod+85 workspace 6
+bindcode $mod+79 workspace 7
+bindcode $mod+80 workspace 8
+bindcode $mod+81 workspace 9
+bindcode $mod+90 workspace 10
+
+# Switch to workspace with numlock numpad keys
+bindcode $mod+Mod2+87 workspace $ws1
+bindcode $mod+Mod2+88 workspace $ws2
+bindcode $mod+Mod2+89 workspace $ws3
+bindcode $mod+Mod2+83 workspace $ws4
+bindcode $mod+Mod2+84 workspace $ws5
+bindcode $mod+Mod2+85 workspace $ws6
+bindcode $mod+Mod2+79 workspace $ws7
+bindcode $mod+Mod2+80 workspace $ws8
+bindcode $mod+Mod2+81 workspace $ws9
+bindcode $mod+Mod2+90 workspace $ws10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1    move container to workspace  $ws1
+bindsym $mod+Shift+2    move container to workspace  $ws2
+bindsym $mod+Shift+3    move container to workspace  $ws3
+bindsym $mod+Shift+4    move container to workspace  $ws4
+bindsym $mod+Shift+5    move container to workspace  $ws5
+bindsym $mod+Shift+6    move container to workspace  $ws6
+bindsym $mod+Shift+7    move container to workspace  $ws7
+bindsym $mod+Shift+8    move container to workspace  $ws8
+bindsym $mod+Shift+9    move container to workspace  $ws9
+bindsym $mod+Shift+0    move container to workspace  $ws10
+
+# Move focused container to workspace with numpad keys
+bindcode $mod+Shift+Mod2+87     move container to workspace  $ws1
+bindcode $mod+Shift+Mod2+88     move container to workspace  $ws2
+bindcode $mod+Shift+Mod2+89     move container to workspace  $ws3
+bindcode $mod+Shift+Mod2+83     move container to workspace  $ws4
+bindcode $mod+Shift+Mod2+84     move container to workspace  $ws5
+bindcode $mod+Shift+Mod2+85     move container to workspace  $ws6
+bindcode $mod+Shift+Mod2+79     move container to workspace  $ws7
+bindcode $mod+Shift+Mod2+80     move container to workspace  $ws8
+bindcode $mod+Shift+Mod2+81     move container to workspace  $ws9
+bindcode $mod+Shift+Mod2+90     move container to workspace  $ws10
+
+# Move focused container to workspace with numpad keys
+bindcode $mod+Shift+87   move container to workspace  $ws1
+bindcode $mod+Shift+88   move container to workspace  $ws2
+bindcode $mod+Shift+89   move container to workspace  $ws3
+bindcode $mod+Shift+83   move container to workspace  $ws4
+bindcode $mod+Shift+84   move container to workspace  $ws5
+bindcode $mod+Shift+85   move container to workspace  $ws6
+bindcode $mod+Shift+79   move container to workspace  $ws7
+bindcode $mod+Shift+80   move container to workspace  $ws8
+bindcode $mod+Shift+81   move container to workspace  $ws9
+bindcode $mod+Shift+90   move container to workspace  $ws10
+
+# Switch/iterate between workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+
+####################
+#    Containers    #
+####################
+
+# Split in horizontal orientation
+bindsym $mod+h split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Change container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Move tiling windows via drag & drop by left-clicking into the title bar,
+# or left-clicking anywhere into the window while holding the floating modifier.
+#tiling_drag modifier titlebar
+
+
+#-------#
+# Focus #
+#-------#
+
+# Change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+ntilde focus right
+
+# Alternatively
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ntilde move right
+
+# Alternatively
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Change focus between tiling/floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Focus the child container
+#bindsym $mod+d focus child
+
+
+#--------#
+# Resize #
+#--------#
+
+# Resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ntilde resize grow width 10 px or 10 ppt
+
+        # Same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # Back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+#------------------#
+# Floating windows #
+#------------------#
+
+for_window [class="Blueman-manager"] floating enable
+for_window [class="Galculator"] floating enable
+for_window [class="GParted"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pamac-updater"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Xfce4-power-manager-settings"] floating enable
+
+
+#--------#
+# Colors #
+#--------#
+
+# Define colors variables
+set $white			#ffffff
+set $gray			#444444
+set $lightgray		#888888
+set $darkgray		#333333
+set $lightblue		#005b96
+set $darkblue		#03396C
+set $lightred		#a41726
+set $darkred		#810020
+
+# Define colors for windows
+# Class                     Border      Backgr.     Text        Indicator   Child_border
+client.focused              $lightblue  $darkblue   $white      $lightblue  $lightblue
+client.focused_inactive     $gray       $darkgray   $white      $darkgray   $darkgray
+client.unfocused            $gray       $darkgray   $lightgray  $darkgray   $darkgray
+client.urgent               $lightred   $darkred    $white      $lightred   $lightred
+#client.placeholder          #000000     #0c0c0c     #ffffff     #000000     #0c0c0c
+#client.background           #ffffff
+
+
+#---------#
+# Borders #
+#---------#
+
+# Determines which border style new windows will have
+default_border pixel 2
+
+# Applies only to windows which are starting out as floating windows
+default_floating_border pixel 1
+
+
+#------#
+# Gaps #
+#------#
+
+# Space between two adjacent windows (or split containers)
+gaps inner 6
+
+# Space along the screen edges
+gaps outer 3
+
+# No gaps will be shown when there is precisely one window or split container on the workspace
+#smart_gaps on
+
+# Draw borders on windows only if there is more than one window in a workspace
+#smart_borders on
+
+
+##################
+#    i3status    #
+##################
+
+# Define colors variables
+set $i3background	#222222
+set $i3statusline	#ffffff
+set $i3separator	#666666
+
+bar {
+    status_command i3status
+    position bottom
+    separator_symbol "|"
+    font pango:DejaVu Sans Mono, FontAwesome 10
+
+    colors {
+    	background $i3background
+    	statusline $i3statusline
+    	separator  $i3separator
+
+#                           Border      Backgr.     Text
+    	focused_workspace   $lightblue  $darkblue   $white
+    	active_workspace    $gray       $darkgray   $white
+    	inactive_workspace  $gray       $darkgray   $lightgray
+    	urgent_workspace    $lightred   $darkred    $white
+    	#binding_mode        #2F343A     #900000     #FFFFFF
+    }
+}
+
+# Hide/unhide i3status bar
+bindsym $mod+m bar mode toggle
+
+
+####################
+#    Lockscreen    #
+####################
+
+#--------#
+# i3lock #
+#--------#
+
+# Auto lock the screen
+#exec --no-startup-id xautolock -time 12 -locker ~/.config/i3/scripts/i3lock/lock.sh
+
+# Lock the screen before suspend
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/i3lock/lock.sh --nofork
+
+# Lock screen
+#bindsym Control+$alt+l exec --no-startup-id "~/.config/i3/scripts/i3lock/lock.sh"
+
+# Suspend system
+#bindsym Control+$alt+s exec --no-startup-id "~/.config/i3/scripts/i3lock/suspend.sh"
+
+
+#------------------#
+# Betterlockscreen #
+#------------------#
+
+# Auto lock the screen
+exec --no-startup-id xautolock -time 12 -locker ~/.config/i3/scripts/betterlockscreen/lock.sh
+
+# Lock the screen before suspend
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/betterlockscreen/lock.sh --nofork
+
+# Lock screen
+bindsym Control+$alt+l exec --no-startup-id "~/.config/i3/scripts/betterlockscreen/lock.sh"
+
+# Suspend system
+bindsym Control+$alt+s exec --no-startup-id "~/.config/i3/scripts/betterlockscreen/suspend.sh"
+
+
+######################
+#    Applications    #
+######################
+
+#---------#
+# Startup #
+#---------#
+
+# Start XDG autostart .desktop files using dex
+exec --no-startup-id dex --autostart --environment i3
+
+# Background
+exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/background.jpg
+
+# Compositor for X
+exec_always --no-startup-id picom --config ~/.config/picom.conf
+
+# Notification daemon
+exec_always --no-startup-id dunst -config "~/.config/dunst/dunstrc"
+
+# Tray icons
+exec_always --no-startup-id "~/.config/i3/scripts/tray.sh"
+
+# Power manager
+exec --no-startup-id xfce4-power-manager
+
+# System monitor
+exec --no-startup-id conky -c ~/.conky/conkyrc
+
+# Numeric lock
+exec_always --no-startup-id numlockx on
+
+
+#-----------#
+# Shortcuts #
+#-----------#
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace
+bindsym $mod+Shift+r restart
+
+# Program launcher
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+d exec --no-startup-id dmenu_run \
+		-fn "Noto Sans Regular-11" -nb "#111111" -nf "#888888" -sb "#03396c" -sf "#ffffff"
+
+# Power menu
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu.sh
+
+# Terminal
+bindsym $mod+Return exec --no-startup-id xfce4-terminal
+
+# Kill window
+bindsym $mod+q kill
+bindsym $mod+Shift+q kill
+
+# Apps
+bindsym Control+$mod+a exec --no-startup-id audacious
+bindsym Control+$mod+c exec --no-startup-id chromium
+bindsym Control+$mod+f exec --no-startup-id firefox
+bindsym Control+$mod+g exec --no-startup-id gimp
+bindsym Control+$mod+o exec --no-startup-id opera
+bindsym Control+$mod+t exec --no-startup-id telegram-desktop
+bindsym $mod+Shift+Return exec --no-startup-id thunar
+
+# Media
+bindsym Shift+F10 exec --no-startup-id playerctl previous
+bindsym Shift+F11 exec --no-startup-id playerctl play-pause
+bindsym Shift+F12 exec --no-startup-id playerctl next
+
+# Screenshot
+bindsym Shift+F5 exec --no-startup-id xfce4-screenshooter -w
+bindsym Control+Shift+F5 exec --no-startup-id xfce4-screenshooter -r
+
+
+#--------#
+# Volume #
+#--------#
+
+set $refresh_i3status killall -SIGUSR1 i3status
+set $refresh_volume bash ~/.config/i3/scripts/volume/volume.sh
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status && $refresh_volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status && $refresh_volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status && $refresh_volume
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status && $refresh_volume
