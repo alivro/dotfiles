@@ -1,0 +1,52 @@
+# i3status configuration file
+
+general {
+	interval = 1
+	colors = true
+	color_good = "#ffffff"
+	color_degraded = "#ffffff"
+	color_bad = "#ffffff"
+	output_format = "i3bar"
+}
+
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "load"
+order += "memory"
+order += "volume master"
+order += "tztime localdate"
+order += "tztime localtime"
+
+cpu_usage {
+	format = " %usage"
+}
+
+cpu_temperature 0 {
+	format = " %degrees°C"
+	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input"
+}
+
+load {
+	format = " %1min %5min %15min"
+}
+
+memory {
+	format = " %used/%total"
+	threshold_degraded = "1G"
+}
+
+volume master {
+	format = " %volume"
+	format_muted = " %volume"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+tztime localdate {
+	format = "%d/%m/%Y"
+}
+
+tztime localtime {
+	format = "%H:%M"
+}
