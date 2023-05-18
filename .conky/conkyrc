@@ -1,0 +1,114 @@
+conky.config = {
+    alignment = 'top_right',			-- Posición en pantalla
+    background = true,					-- Ejecución en segundo plano
+    border_width = 2,					-- Ancho del borde
+    cpu_avg_samples = 2,				-- Muestras a promediar para el monitoreo de la CPU
+    default_color = 'white',			-- Color por defecto y color del borde
+    default_outline_color = 'white',	-- Color por defecto del contorno
+    default_shade_color = 'white',		-- Color por defecto del sombreado
+    double_buffer = true,				-- Elimina parpadedo
+    draw_borders = false,				-- Dibujar bordes alrededor del texto
+    draw_graph_borders = true,			-- Dibujar bordes alrededor de las gráficas
+    draw_outline = false,				-- Dibujar contornos
+    draw_shades = false,				-- Dibujar sombras
+    font = 'Roboto Mono:size=10',		-- Fuente
+    format_human_readable = true;		-- Formato legible por humanos (KiB, MiB, GiB)
+    gap_x = 6,							-- Espacio entre el borde derecho/izquierdo de la pantalla
+    gap_y = 6,							-- Espacio entre el borde superior/inferior de la pantalla
+    net_avg_samples = 2,				-- Muestras a promediar para el monitoreo de red
+    own_window = true,					-- Crear una ventana propia
+    own_window_argb_visual = true,		-- Usar ARGB (transparencia)
+    own_window_argb_value = 205,		-- Opacidad de la ventana
+    own_window_class = 'Conky',			-- Clase
+    own_window_colour = '#000000',		-- Color de fondo
+    own_window_hints = 'below',			--
+    own_window_transparent = false,		-- Establecer transparencia
+    own_window_type = 'override',		-- Tipo de ventana
+    stippled_borders = 0,				-- Borde punteado
+    update_interval = 1.0,				-- Intervalo de actualización
+    use_xft = true,						-- Usar Xft (fuente suavizada)
+    color0 = '#FFFFFF',					-- Títulos
+    color1 = '#d9d9d9',					-- Variables
+    color2 = '#f2f2f2',					-- Valores
+    color3 = '#388099'					-- Barras/Gráficas
+}
+
+conky.text = [[
+#------------#
+# HORA/FECHA #
+#------------#
+${color0}${font GE Inspira:size=36}${alignc}${time %k}:${time %M}${font}${color}
+${color0}${font GE Inspira:size=12}${alignc}${time %A}, ${time %e} ${time %B} ${time %Y}${font}${color}
+
+#---------#
+# SISTEMA #
+#---------#
+${color0}${font Roboto:size=10}S Y S T E M  ${hr 2}${font}${color}
+${color1}OS:${color} ${alignr}${color2}${execi 3600 lsb_release -d | awk '{$1=""; print $0}'}${color}
+${color1}Kernel:${color} ${alignr}${color2}${kernel}${color}
+${color1}Uptime:${color} ${alignr}${color2}${uptime_short}${color} ${voffset 9}
+#
+#
+#------------#
+# PROCESADOR #
+#------------#
+${color0}${font Roboto:size=10}P R O C E S S O R  ${hr 2}${font}${color}
+${color1}Frequency:${color} ${alignr}${color2}${freq_g} GHz${color}
+${color1}Temperature:${color} ${alignr}${color2}${exec sensors | grep 'Package id' | awk '{print $4}' | cut -c 2-}${color}
+${color1}Usage:${color} ${alignr}${color2}${cpu}%${color}
+${color3}${cpugraph 20}${color}
+#
+#
+#---------#
+# MEMORIA #
+#---------#
+${color0}${font Roboto:size=10}M E M O R Y  ${hr 2}${font}${color}
+# RAM
+${color1}RAM:${color} ${goto 70} \
+${color2}${exec free --si -m | awk '/^Mem/{printf "%.1fGiB\n",$3/1024}'}/${memmax}${color} ${alignr} \
+${color2}${exec free --si -m|awk '/^Mem/{printf "%.1f%%\n", 100*$3/$2}'}${color}
+${color3}${memgraph 20}${color}
+# Swap
+${color1}Swap:${color} ${goto 90}${color2}${swap}/${swapmax}${color} ${alignr}${color2}${swapperc}%${color}
+${color3}${swapbar}${color}${voffset 4}
+#
+#
+#----------------#
+# ALMACENAMIENTO #
+#----------------#
+${color0}${font Roboto:size=10}S T O R A G E  ${hr 2}${font}${color}
+# root
+${color1}/${color} ${goto 70}${color2}${fs_used /}/${fs_size /}${color2} ${alignr}${color2}${fs_used_perc /}%${color}
+${color3}${fs_bar 4 /}${color}
+${color1}/home${color} ${goto 70}${color2}${fs_used /home}/${fs_size /home}${color2} ${alignr}${color2}${fs_used_perc /home}%${color}
+# home
+${color3}${fs_bar 4 /home}${color}
+${color1}Read:${color} ${color2}${diskio_read}${color} ${goto 123}${color1} \
+Write:${color} ${color2}${diskio_write}${color}
+${color3}${diskiograph_read 20,116} ${diskiograph_write 20,116}${color}
+#
+#
+#-----#
+# RED #
+#-----#
+${color0}${font Roboto:size=10}N E T W O R K  ${hr 2}${font}${color}
+${color1}SSID:${color} ${alignr}${color2}${wireless_essid wlo1}${color}
+${color1}IP Address:${color} ${alignr}${color2}${addrs wlo1}${color}${voffset 4}
+# Upload
+${color1}Upload:${color} ${alignr}${color2}${upspeed wlo1}${color} ${color2}(${totalup wlo1})${color}
+${color3}${downspeedgraph wlo1 20}${color}
+# Download
+${color1}Download:${color} ${alignr}${color2}${downspeed wlo1}${color} ${color2}(${totaldown wlo1})${color}
+${color3}${upspeedgraph wlo1 20}${color}
+#
+#
+#----------#
+# PROCESOS #
+#----------#
+${color0}${font Roboto:size=10}P R O C E S S E S  ${hr 2}${font}${color}
+${color1}Name ${goto 132}%CPU ${goto 195}%MEM
+${color2}${top name 1} ${goto 131}${top cpu 1} ${goto 196}${top mem 1}${color}
+${color2}${top name 2} ${goto 131}${top cpu 2} ${goto 196}${top mem 2}${color}
+${color2}${top name 3} ${goto 131}${top cpu 3} ${goto 196}${top mem 3}${color}
+${color2}${top name 4} ${goto 131}${top cpu 4} ${goto 196}${top mem 4}${color}
+]]
